@@ -96,7 +96,8 @@ function ProfileView({ data, onEdit }: { data: any; onEdit: () => void }) {
       minHeight: "100vh", 
       background: "linear-gradient(180deg, #f5f1ea 0%, #e8dfd6 100%)",
       position: "relative",
-      overflow: "auto"
+      overflow: "auto",
+      overflowX: "hidden"
     }}>
       {/* Subtle background shapes */}
       <div style={{
@@ -128,7 +129,8 @@ function ProfileView({ data, onEdit }: { data: any; onEdit: () => void }) {
         display: "flex",
         flexDirection: "column",
         gap: "clamp(20px, 3vw, 40px)",
-        animation: "fadeIn 0.8s ease"
+        animation: "fadeIn 0.8s ease",
+        width: "100%"
       }}>
         {/* Main profile card with glassmorphism - Mobile responsive */}
         <div style={{
@@ -517,7 +519,8 @@ function ProfileEdit({ data, onSave, onCancel, saving }: { data: any; onSave: (d
       minHeight: "100vh",
       background: "linear-gradient(180deg, #f5f1ea 0%, #e8dfd6 100%)",
       position: "relative",
-      overflow: "auto"
+      overflow: "auto",
+      overflowX: "hidden"
     }}>
       {/* Subtle background shapes */}
       <div style={{
@@ -539,7 +542,9 @@ function ProfileEdit({ data, onSave, onCancel, saving }: { data: any; onSave: (d
         margin: "0 auto",
         padding: "clamp(20px, 5vw, 60px) clamp(16px, 4vw, 40px)",
         minHeight: "100vh",
-        alignItems: "start"
+        alignItems: "start",
+        width: "100%",
+        boxSizing: "border-box"
       }}>
         {/* Left: Edit Form */}
         <form onSubmit={handleSubmit(onSubmit)} style={{
