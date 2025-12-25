@@ -142,7 +142,6 @@ git clone https://github.com/356Adhil/Profile-Management.git
 cd profile-module
 ```
 
-
 ```bash
 cd backend
 npm install
