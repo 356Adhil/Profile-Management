@@ -7,7 +7,14 @@
 [![Node.js](https://img.shields.io/badge/Node.js-20-green)](https://nodejs.org/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-9.0-green)](https://www.mongodb.com/)
 
-## 📋 Table of Contents
+## � Live Demo
+
+- **Frontend (Vercel)**: [https://profile-management-tau-gules.vercel.app/](https://profile-management-tau-gules.vercel.app/)
+- **Backend API (Render)**: [https://profile-management-tn3t.onrender.com](https://profile-management-tn3t.onrender.com)
+
+> **Note**: Backend is hosted on Render's free tier and may experience cold starts (30-60 seconds) after periods of inactivity.
+
+## �📋 Table of Contents
 
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
@@ -365,7 +372,7 @@ Test coverage includes:
 
 ## 🚀 Deployment
 
-### Backend Deployment (Example: Railway/Render)
+### Backend Deployment (Example: Render)
 
 1. Set environment variables:
 
@@ -378,7 +385,7 @@ Test coverage includes:
    npm start
    ```
 
-### Frontend Deployment (Example: Vercel/Netlify)
+### Frontend Deployment (Example: Vercel)
 
 1. Set environment variable:
 
@@ -407,23 +414,6 @@ MONGODB_URI=mongodb://localhost:27017/profile-module
 
 ```env
 VITE_API_BASE_URL=http://localhost:4000
-```
-
----
-
-## 🧹 Cleanup
-
-Remove old backup files:
-
-```bash
-./cleanup.sh
-```
-
-Or manually:
-
-```bash
-rm frontend/src/components/ProfileForm_old.tsx
-rm frontend/src/components/ProfileForm_minimal.tsx
 ```
 
 ---
