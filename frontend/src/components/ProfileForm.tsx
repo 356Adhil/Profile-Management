@@ -492,6 +492,10 @@ function ProfileEdit({ data, onSave, onCancel, saving }: { data: any; onSave: (d
   const bioLength = formData.bio?.length || 0;
   const completion = calculateCompletion({ ...formData, avatarUrl: formData.avatarUrl });
 
+  // Track if skills have changed
+  const skillsChanged = JSON.stringify(formData.skills || []) !== JSON.stringify(data.skills || []);
+  const hasChanges = isDirty || avatarFile || skillsChanged;
+
   const avatarSrc = React.useMemo(() => {
     if (avatarFile) return URL.createObjectURL(avatarFile);
     if (!formData.avatarUrl) return null;
@@ -856,73 +860,71 @@ function ProfileEdit({ data, onSave, onCancel, saving }: { data: any; onSave: (d
             </div>
 
             <div style={{ display: "flex", gap: 12, paddingTop: 16, flexWrap: "wrap" }}>
-              {(isDirty || avatarFile) && (
-                <>
-                  <button
-                    type="button"
-                    onClick={onCancel}
-                    disabled={saving}
-                    style={{
-                      flex: isMobile ? "1 1 100%" : 1,
-                      padding: "16px 24px",
-                      borderRadius: 12,
-                      border: "2px solid #e5e7eb",
-                      background: "#fff",
-                      color: "#6b7280",
-                      cursor: saving ? "not-allowed" : "pointer",
-                      fontSize: 15,
-                      fontWeight: 700,
-                      transition: "all 0.2s ease",
-                      letterSpacing: "0.02em"
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!saving) {
-                        e.currentTarget.style.borderColor = "#9ca3af";
-                        e.currentTarget.style.color = "#374151";
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!saving) {
-                        e.currentTarget.style.borderColor = "#e5e7eb";
-                        e.currentTarget.style.color = "#6b7280";
-                      }
-                    }}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={saving || Object.keys(errors).length > 0}
-                    style={{
-                      flex: isMobile ? "1 1 100%" : 2,
-                      padding: "16px 24px",
-                      borderRadius: 12,
-                      border: "none",
-                      background: saving || Object.keys(errors).length > 0 ? "#e5e7eb" : "#4a3234",
-                      color: saving || Object.keys(errors).length > 0 ? "#9ca3af" : "#f5f1ea",
-                      cursor: saving || Object.keys(errors).length > 0 ? "not-allowed" : "pointer",
-                      fontSize: 14,
-                      fontWeight: 600,
-                      transition: "all 0.3s ease",
-                      letterSpacing: "0",
-                      boxShadow: saving || Object.keys(errors).length > 0 ? "none" : "0 4px 16px rgba(74, 50, 52, 0.3)"
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!saving && Object.keys(errors).length === 0) {
-                        e.currentTarget.style.transform = "translateY(-2px)";
-                        e.currentTarget.style.boxShadow = "0 6px 20px rgba(74, 50, 52, 0.4)";
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!saving && Object.keys(errors).length === 0) {
-                        e.currentTarget.style.transform = "translateY(0)";
-                        e.currentTarget.style.boxShadow = "0 4px 16px rgba(74, 50, 52, 0.3)";
-                      }
-                    }}
-                  >
-                    {saving ? "💾 Saving..." : "💾 Save Changes"}
-                  </button>
-                </>
+              <button
+                type="button"
+                onClick={onCancel}
+                disabled={saving}
+                style={{
+                  flex: isMobile ? "1 1 100%" : 1,
+                  padding: "16px 24px",
+                  borderRadius: 12,
+                  border: "2px solid #e5e7eb",
+                  background: "#fff",
+                  color: "#6b7280",
+                  cursor: saving ? "not-allowed" : "pointer",
+                  fontSize: 15,
+                  fontWeight: 700,
+                  transition: "all 0.2s ease",
+                  letterSpacing: "0.02em"
+                }}
+                onMouseEnter={(e) => {
+                  if (!saving) {
+                    e.currentTarget.style.borderColor = "#9ca3af";
+                    e.currentTarget.style.color = "#374151";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!saving) {
+                    e.currentTarget.style.borderColor = "#e5e7eb";
+                    e.currentTarget.style.color = "#6b7280";
+                  }
+                }}
+              >
+                Cancel
+              </button>
+              {hasChanges && (
+                <button
+                  type="submit"
+                  disabled={saving || Object.keys(errors).length > 0}
+                  style={{
+                    flex: isMobile ? "1 1 100%" : 2,
+                    padding: "16px 24px",
+                    borderRadius: 12,
+                    border: "none",
+                    background: saving || Object.keys(errors).length > 0 ? "#e5e7eb" : "#4a3234",
+                    color: saving || Object.keys(errors).length > 0 ? "#9ca3af" : "#f5f1ea",
+                    cursor: saving || Object.keys(errors).length > 0 ? "not-allowed" : "pointer",
+                    fontSize: 14,
+                    fontWeight: 600,
+                    transition: "all 0.3s ease",
+                    letterSpacing: "0",
+                    boxShadow: saving || Object.keys(errors).length > 0 ? "none" : "0 4px 16px rgba(74, 50, 52, 0.3)"
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!saving && Object.keys(errors).length === 0) {
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow = "0 6px 20px rgba(74, 50, 52, 0.4)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!saving && Object.keys(errors).length === 0) {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "0 4px 16px rgba(74, 50, 52, 0.3)";
+                    }
+                  }}
+                >
+                  {saving ? "💾 Saving..." : "💾 Save Changes"}
+                </button>
               )}
             </div>
           </div>
