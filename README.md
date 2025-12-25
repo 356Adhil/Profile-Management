@@ -138,11 +138,10 @@ profile-module/
 #### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/356Adhil/Profile-Management.git
 cd profile-module
 ```
 
-#### 2. Backend Setup
 
 ```bash
 cd backend
@@ -430,20 +429,6 @@ rm frontend/src/components/ProfileForm_minimal.tsx
 
 ---
 
-## 📖 Documentation
-
-- **[ASSESSMENT_CHECKLIST.md](./ASSESSMENT_CHECKLIST.md)** - Complete assessment checklist
-- **[MOBILE_SOCIAL_UPDATES.md](./MOBILE_SOCIAL_UPDATES.md)** - Mobile responsive & social features
-- **[UI_FEATURES.md](./UI_FEATURES.md)** - UI enhancements documentation
-
----
-
-## 🤝 Contributing
-
-This is an assessment project. Contributions are not expected.
-
----
-
 ## 📄 License
 
 This project is created for educational purposes as part of a MERN stack assessment.
@@ -453,7 +438,6 @@ This project is created for educational purposes as part of a MERN stack assessm
 ## 🎯 Assessment Completion
 
 **Status:** ✅ Complete  
-**Score:** 100/100  
 **Date:** December 25, 2025
 
 ### Requirements Met:
@@ -477,16 +461,6 @@ This project is created for educational purposes as part of a MERN stack assessm
 - ✅ Profile strength indicator
 - ✅ Optimistic UI updates
 - ✅ Glassmorphism design
-
----
-
-## 📞 Support
-
-For questions about this project:
-
-1. Check the [ASSESSMENT_CHECKLIST.md](./ASSESSMENT_CHECKLIST.md)
-2. Review the code comments
-3. Run the tests to see functionality
 
 ---
 
