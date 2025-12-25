@@ -6,6 +6,12 @@ export type ProfileDoc = {
   bio?: string;
   avatarUrl?: string;
   skills: string[];
+  socialLinks?: {
+    github?: string;
+    linkedin?: string;
+    twitter?: string;
+    website?: string;
+  };
   version: number;
   updatedAt: Date;
 };
@@ -17,6 +23,16 @@ const ProfileSchema = new Schema<ProfileDoc>(
     bio: { type: String, trim: true, maxlength: 500 },
     avatarUrl: { type: String, trim: true, maxlength: 500 },
     skills: { type: [String], default: [] },
+    socialLinks: {
+      type: {
+        github: { type: String, trim: true },
+        linkedin: { type: String, trim: true },
+        twitter: { type: String, trim: true },
+        website: { type: String, trim: true },
+      },
+      default: {},
+      _id: false
+    },
     version: { type: Number, required: true, default: 1 },
   },
   {

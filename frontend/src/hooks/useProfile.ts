@@ -33,6 +33,15 @@ export function useProfile() {
             return prev?.skills || [];
           }
         })(),
+        socialLinks: (() => {
+          try {
+            const raw = String(formData.get("socialLinks") || "{}");
+            const obj = JSON.parse(raw);
+            return typeof obj === "object" ? obj : prev?.socialLinks || {};
+          } catch {
+            return prev?.socialLinks || {};
+          }
+        })(),
         updatedAt: new Date().toISOString(),
         version: Number(formData.get("version") || prev?.version || 0),
       };

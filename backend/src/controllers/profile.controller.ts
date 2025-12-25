@@ -22,6 +22,7 @@ export async function getProfile(_req: Request, res: Response, next: NextFunctio
         bio: "",
         avatarUrl: "",
         skills: [],
+        socialLinks: {},
         updatedAt: new Date().toISOString(),
         version: 0,
       });
@@ -33,6 +34,7 @@ export async function getProfile(_req: Request, res: Response, next: NextFunctio
       bio: doc.bio ?? "",
       avatarUrl: doc.avatarUrl ?? "",
       skills: doc.skills ?? [],
+      socialLinks: doc.socialLinks ?? {},
       updatedAt: doc.updatedAt,
       version: doc.version,
     });
@@ -44,6 +46,16 @@ export async function getProfile(_req: Request, res: Response, next: NextFunctio
 export async function updateProfile(req: Request, res: Response, next: NextFunction) {
   try {
     const rawSkills = (req.body as any).skills;
+    const rawSocialLinks = (req.body as any).socialLinks;
+
+    let socialLinks = {};
+    if (typeof rawSocialLinks === 'string') {
+      try {
+        socialLinks = JSON.parse(rawSocialLinks);
+      } catch {}
+    } else if (typeof rawSocialLinks === 'object') {
+      socialLinks = rawSocialLinks;
+    }
 
     const payload = {
       name: sanitizeString((req.body as any).name),
@@ -51,6 +63,7 @@ export async function updateProfile(req: Request, res: Response, next: NextFunct
       bio: sanitizeString((req.body as any).bio) || undefined,
       avatarUrl: sanitizeString((req.body as any).avatarUrl) || undefined,
       skills: sanitizeSkills(rawSkills),
+      socialLinks,
       version: Number((req.body as any).version ?? 0),
     };
 
@@ -83,6 +96,7 @@ export async function updateProfile(req: Request, res: Response, next: NextFunct
         bio: created.bio ?? "",
         avatarUrl: created.avatarUrl ?? "",
         skills: created.skills ?? [],
+        socialLinks: created.socialLinks ?? {},
         updatedAt: created.updatedAt,
         version: created.version,
       });
@@ -101,6 +115,7 @@ export async function updateProfile(req: Request, res: Response, next: NextFunct
     existing.bio = parsed.bio;
     existing.avatarUrl = parsed.avatarUrl;
     existing.skills = parsed.skills;
+    existing.socialLinks = parsed.socialLinks;
     existing.version = existing.version + 1;
 
     await existing.save();
@@ -111,6 +126,7 @@ export async function updateProfile(req: Request, res: Response, next: NextFunct
       bio: existing.bio ?? "",
       avatarUrl: existing.avatarUrl ?? "",
       skills: existing.skills ?? [],
+      socialLinks: existing.socialLinks ?? {},
       updatedAt: existing.updatedAt,
       version: existing.version,
     });

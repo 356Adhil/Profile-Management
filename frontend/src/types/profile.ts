@@ -4,6 +4,12 @@ export type Profile = {
   bio?: string;
   avatarUrl?: string;
   skills: string[];
+  socialLinks?: {
+    github?: string;
+    linkedin?: string;
+    twitter?: string;
+    website?: string;
+  };
   updatedAt: string;
   version: number;
 };
@@ -14,6 +20,12 @@ export type ProfileFormValues = {
   bio?: string;
   avatarUrl?: string;
   skills: string[];
+  socialLinks?: {
+    github?: string;
+    linkedin?: string;
+    twitter?: string;
+    website?: string;
+  };
   version: number;
   avatarFile?: File | null;
 };
